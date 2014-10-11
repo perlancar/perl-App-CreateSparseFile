@@ -65,6 +65,7 @@ _
         {
             argv => [qw/file.bin 30G/],
             summary => 'Create a sparse file called file.bin with size of 30GB',
+            test => 0,
         },
     ],
 };
