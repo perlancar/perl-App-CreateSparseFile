@@ -75,20 +75,23 @@ sub create_sparse_file {
 
     # TODO: use Parse::Number::WithPrefix::EN
     my $size = $args{size} // 0;
-    if ($size =~ s/([A-Za-z])[Bb]?\z//) {
-        my $prefix = $1;
-        if ($prefix =~ /[Kk]/) {
-            $size *= 1024;
-        } elsif ($prefix =~ /[Mm]/) {
-            $size *= 1024**2;
-        } elsif ($prefix =~ /[Gg]/) {
-            $size *= 1024**3;
-        } elsif ($prefix =~ /[Tt]/) {
-            $size *= 1024**4;
+    return [400, "Invalid size, please specify num or num[KMGT]"]
+        unless $size =~ /\A(\d+(?:\.\d+)?)(?:([A-Za-z])[Bb]?)?\z/;
+    my ($num, $suffix) = ($1, $2);
+    if ($suffix) {
+        if ($suffix =~ /[Kk]/) {
+            $num *= 1024;
+        } elsif ($suffix =~ /[Mm]/) {
+            $num *= 1024**2;
+        } elsif ($suffix =~ /[Gg]/) {
+            $num *= 1024**3;
+        } elsif ($suffix =~ /[Tt]/) {
+            $num *= 1024**4;
+        } else {
+            return [400, "Unknown number suffix '$suffix'"];
         }
     }
-    return [400, "Invalid size, please specify num or num[KMGT]"]
-        unless $size =~ /\A\d+(\.\d+)?\z/;
+    $num = int($num);
 
     my $fname = $args{name};
 
@@ -102,14 +105,15 @@ sub create_sparse_file {
         unlink $fname or return [400, "Can't unlink $fname: $!"];
     } else {
         if ($interactive) {
+            my $s = $suffix ? "$num ($size)" : $num;
             return [200, "Cancelled"]
-                unless confirm "Confirm create '$fname' with size $size (y/n)?";
+                unless confirm "Confirm create '$fname' with size $s (y/n)?";
         }
     }
 
     open my($fh), ">", $fname or return [500, "Can't create $fname: $!"];
-    if ($size > 0) {
-        seek $fh, $size-1, 0;
+    if ($num > 0) {
+        seek $fh, $num-1, 0;
         print $fh "\0";
     }
     [200, "Done"];
