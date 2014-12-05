@@ -7,7 +7,7 @@ use 5.010001;
 use strict;
 use warnings;
 
-use SHARYANTO::File::Util qw(file_exists);
+use File::MoreUtil qw(file_exists);
 use SHARYANTO::Text::Prompt qw(confirm);
 
 our %SPEC;
