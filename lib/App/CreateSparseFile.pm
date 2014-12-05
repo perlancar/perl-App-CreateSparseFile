@@ -8,7 +8,7 @@ use strict;
 use warnings;
 
 use File::MoreUtil qw(file_exists);
-use SHARYANTO::Text::Prompt qw(confirm);
+use IO::Prompt::I18N qw(confirm);
 
 our %SPEC;
 
@@ -99,7 +99,7 @@ sub create_sparse_file {
     if (file_exists $fname) {
         if ($interactive) {
             return [200, "Cancelled"]
-                unless confirm "Confirm override existing file (y/n)?";
+                unless confirm "Confirm override existing file";
         } else {
             return [409, "File already exists"] unless $args{override};
         }
@@ -108,7 +108,7 @@ sub create_sparse_file {
         if ($interactive) {
             my $s = $suffix ? "$num ($size)" : $num;
             return [200, "Cancelled"]
-                unless confirm "Confirm create '$fname' with size $s (y/n)?";
+                unless confirm "Confirm create '$fname' with size $s";
         }
     }
 
