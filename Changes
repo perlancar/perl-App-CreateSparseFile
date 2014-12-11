@@ -1,5 +1,11 @@
 Revision history for App-CreateSparseFile
 
+0.04    2014-12-11 (PERLANCAR)
+
+	- [ux] Default confirm overriding to 0 (so pressing only Enter will
+	  abort).
+
+
 0.03    2014-12-11 (PERLANCAR)
 
 	- No functional changes.
