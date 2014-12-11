@@ -1,5 +1,13 @@
 Revision history for App-CreateSparseFile
 
+0.03    2014-12-11 (PERLANCAR)
+
+	- No functional changes.
+
+	- Use new name of renamed module SHARYANTO::Text::Prompt ->
+	  IO::Prompt::I18N.
+
+
 0.02    2014-12-05 (PERLANCAR)
 
 	- No functional changes.
