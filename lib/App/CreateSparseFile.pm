@@ -99,7 +99,7 @@ sub create_sparse_file {
     if (file_exists $fname) {
         if ($interactive) {
             return [200, "Cancelled"]
-                unless confirm "Confirm override existing file";
+                unless confirm "Confirm override existing file", {default=>0};
         } else {
             return [409, "File already exists"] unless $args{override};
         }
