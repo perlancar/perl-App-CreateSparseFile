@@ -121,7 +121,7 @@ sub create_sparse_file {
 }
 
 1;
-# ABSTRACT: Create sparse file
+# ABSTRACT:
 
 =head1 SYNOPSIS
 
