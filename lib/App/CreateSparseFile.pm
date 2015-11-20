@@ -49,13 +49,13 @@ If set to false then will not prompt interactively and usually will proceed
 
 _
         },
-        override => {
-            summary => 'Whether to override existing file',
+        overwrite => {
+            summary => 'Whether to overwrite existing file',
             schema => 'bool',
             default => 0,
             description => <<'_',
 
-If se to true then will override existing file without warning. The default is
+If se to true then will overwrite existing file without warning. The default is
 to prompt, or bail (if not interactive).
 
 _
@@ -99,9 +99,9 @@ sub create_sparse_file {
     if (file_exists $fname) {
         if ($interactive) {
             return [200, "Cancelled"]
-                unless confirm "Confirm override existing file", {default=>0};
+                unless confirm "Confirm overwrite existing file", {default=>0};
         } else {
-            return [409, "File already exists"] unless $args{override};
+            return [409, "File already exists"] unless $args{overwrite};
         }
         unlink $fname or return [400, "Can't unlink $fname: $!"];
     } else {
