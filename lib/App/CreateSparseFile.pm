@@ -66,6 +66,7 @@ _
             argv => [qw/file.bin 30G/],
             summary => 'Create a sparse file called file.bin with size of 30GB',
             test => 0,
+            'x.doc.show_result' => 0, # to avoid having PWP:Rinci execute our function to get result
         },
     ],
 };
