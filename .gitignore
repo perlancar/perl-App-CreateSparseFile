@@ -1,3 +1,4 @@
 App-CreateSparseFile-*
 .build
 *~
+nytprof*
