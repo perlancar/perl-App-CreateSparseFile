@@ -70,7 +70,7 @@ _
         },
     ],
     links => [
-        {prog => 'fallocate'},
+        {url => 'prog:fallocate'},
     ],
 };
 sub create_sparse_file {
