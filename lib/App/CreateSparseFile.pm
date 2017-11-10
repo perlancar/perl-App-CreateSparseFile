@@ -69,6 +69,9 @@ _
             'x.doc.show_result' => 0, # to avoid having PWP:Rinci execute our function to get result
         },
     ],
+    links => [
+        {prog => 'fallocate'},
+    ],
 };
 sub create_sparse_file {
     my %args = @_;
